@@ -1,10 +1,10 @@
 {
   "scripts": {
-    "build": "parcel build src/index.html --out-dir ./assets --public-url assets/ && mv assets/index.html .",
+    "build": "parcel build src/index.html --out-dir ./assets --public-url assets/ --global shpf && mv assets/index.html .",
     "clean": "rm assets/*",
     "format": "eslint --fix './js/*.js'; stylelint --fix './css/*.css'",
     "lint": "eslint './js/*.js'; stylelint './css/*.css'",
-    "start": "parcel src/index.html"
+    "start": "parcel src/index.html --global shpf"
   },
   "license": "MIT",
   "devDependencies": {

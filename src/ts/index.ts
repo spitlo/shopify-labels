@@ -1,6 +1,6 @@
 import Papa from  'papaparse'
 
-function handleFiles(files) {
+export function handleFiles(files) {
   if (window.FileReader) {
     var file = files[0]
     Papa.parse(file, {
