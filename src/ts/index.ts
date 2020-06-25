@@ -1,3 +1,5 @@
+import Papa from  'papaparse'
+
 function handleFiles(files) {
   if (window.FileReader) {
     var file = files[0]

@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Print labels from exported Shopify orders</title>
+    <link rel="stylesheet" href="scss/styles.scss" />
+  </head>
+
+  <body>
+    <div id="input">
+      <form>
+        <fieldset>
+          <label for="file-form">
+            <strong>Orders file (csv format):</strong>
+          </label>
+          <input type="file" id="file-form" onchange="handleFiles(this.files)" accept=".csv">
+        </fieldset>
+      </form>
+    </div>
+    <div id="output"></div>
+    <script src="ts/index.ts"></script>
+  </body>
+</html>

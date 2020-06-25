@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+set -eu
+
+# shellcheck source=./env.globals
+source bin/env.globals
+
+METHOD='patch'
+ENVIRONMENT=""
+USAGE="
+${BROWN}Usage${NC}: $0 [ARGUMENTS]
+Increases version of project, builds, commits. Then pushes to GitHub..
+
+${BROWN}Arguments${NC}:
+  [patch|minor|major]   Semver version change. Defaults to 'patch'.
+"
+
+# Handle args
+for arg in "$@"; do
+  if [ "$arg" = "patch" ] || [ "$arg" = "minor" ] || [ "$arg" = "major" ]; then
+    METHOD="$arg"
+  elif [ "$arg" = "help" ] || [ "$arg" = "--help" ] || [ "$arg" = "-h" ]; then
+    echo -e "$USAGE"
+    exit 0
+  else
+    echo "Unknown argument '$arg'"
+    exit 0
+  fi
+done
+
+echo -e "\n --- Publishing."
+
+if [ "$(git symbolic-ref -q HEAD)" != "refs/heads/master" ]; then
+  echo "Publishing to production is only allowed from the master branch. Exiting."
+  exit 1
+fi
+
+if [ -n "$(git status --porcelain|grep -v '^??')" ]; then
+  echo "Please commit your changes before publishing."
+  exit 1
+else
+  echo -e "\n- Building."
+  yarn build
+  git add assets/ index.html
+  git commit -m "Build"
+fi
+
+echo -e "\n- Applying ${METHOD} update to package."
+yarn version --"$METHOD"
+
+echo -e "\n- Pushing new tag."
+git push origin master
+git push --tags
