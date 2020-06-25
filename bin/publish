@@ -5,7 +5,6 @@ set -eu
 source bin/env.globals
 
 METHOD='patch'
-ENVIRONMENT=""
 USAGE="
 ${BROWN}Usage${NC}: $0 [ARGUMENTS]
 Increases version of project, builds, commits. Then pushes to GitHub..
