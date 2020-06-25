@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <meta charSet="utf-8" />
+    <title>Print labels from exported Shopify orders</title>
+    <link rel = "stylesheet" type = "text/css" href = "css/styles.css" />
+  </head>
+
+  <body>
+    <div id="input">
+      <form>
+        <fieldset>
+          <label for="file-form">
+            <strong>Orders file (csv format):</strong>
+          </label>
+          <input type="file" id="file-form" onchange="handleFiles(this.files)" accept=".csv">
+        </fieldset>
+      </form>
+    </div>
+    <div id="output"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.2.0/papaparse.min.js"></script>
+    <script src="js/index.js"></script>
+  </body>
+</html>

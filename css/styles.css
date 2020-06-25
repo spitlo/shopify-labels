@@ -1,0 +1,39 @@
+@media screen {
+  #output {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 60px;
+  }
+
+  div.label {
+    margin-bottom: 12px;
+  }
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 8mm 6mm;
+  }
+
+  body {
+    width: 210mm;
+    margin: 0;
+    padding: 0;
+  }
+
+  #input {
+    display: none;
+  }
+
+  #output {
+    display: grid;
+    grid-template-columns: 66mm 66mm 66mm;
+  }
+
+  div.label {
+    height: 25.4mm;
+    margin: 0.2mm;
+    padding: 0;
+  }
+}

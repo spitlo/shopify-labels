@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "format": "eslint --fix './js/*.js'; stylelint --fix './css/*.css'",
+    "lint": "eslint './js/*.js'; stylelint './css/*.css'"
+  },
+  "devDependencies": {
+    "eslint": "7.3.1",
+    "eslint-config-prettier": "6.11.0",
+    "eslint-plugin-prettier": "3.1.4",
+    "prettier": "2.0.5",
+    "stylelint": "13.6.1"
+  }
+}
