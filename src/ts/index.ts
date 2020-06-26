@@ -29,7 +29,7 @@ export function handleFiles(files) {
 function printLabels(lines) {
   var output = document.getElementById('output')
   output.innerHTML = ''
-  var labels = ''
+  var labels = '<section class="page">'
 
   for (var i = 0; i < lines.length; i++) {
     var line = lines[i]
@@ -48,7 +48,11 @@ function printLabels(lines) {
     label += shippingZip + ' ' + line['Shipping City'] + '<br>'
     label += '</div>'
     labels += label
+    if (i && i % 32 === 0) {
+      labels += '</section><section class="page">'
+    }
   }
+  labels += '</section>'
 
   output.insertAdjacentHTML('afterbegin', labels)
 }
