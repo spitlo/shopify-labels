@@ -1,0 +1,2 @@
+@media screen{body{font-family:Courier New,Courier,monospace}.page{width:100%;margin:.2em .1em;display:grid;grid-template-columns:1fr 1fr 1fr}div.label{margin-bottom:12px}}@media print{@page{size:210mm 297mm}body{margin:0;padding:0}.page,body{width:210mm}.page{height:297mm;margin:8mm 6mm;display:grid;grid-template-columns:repeat(3,66mm);grid-template-rows:repeat(11,27mm);page-break-after:always;break-after:page}#input{display:none}div.label{font-family:Courier New,Courier,monospace;font-size:16px;margin:0;padding:0}}
+/*# sourceMappingURL=assets/styles.c3641cc4.css.map */
