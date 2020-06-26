@@ -1,18 +1,18 @@
-import Papa from  'papaparse'
+import Papa from 'papaparse'
 
 export function handleFiles(files) {
   if (window.FileReader) {
-    var file = files[0]
+    const file = files[0]
     Papa.parse(file, {
       complete: function (parsed) {
         // Parsed, now parse again!
-        var lines = []
-        var keys = parsed.data[0]
-        for (var i = 1; i < parsed.data.length; i++) {
-          var parsedLine = parsed.data[i]
+        const lines = []
+        const keys = parsed.data[0]
+        for (let i = 1; i < parsed.data.length; i++) {
+          const parsedLine = parsed.data[i]
           if (parsedLine[0]) {
-            var line = {}
-            for (var j = 0; j < parsedLine.length; j++) {
+            const line = {}
+            for (let j = 0; j < parsedLine.length; j++) {
               line[keys[j]] = parsedLine[j]
             }
             lines.push(line)
@@ -27,19 +27,19 @@ export function handleFiles(files) {
 }
 
 function printLabels(lines) {
-  var output = document.getElementById('output')
+  const output = document.getElementById('output')
   output.innerHTML = ''
-  var labels = '<section class="page">'
+  let labels = '<section class="page">'
 
-  for (var i = 0; i < lines.length; i++) {
-    var line = lines[i]
-    var shippingAddress1 = line['Shipping Address1'] || ''
-    var shippingAddress2 = line['Shipping Address2'] || ''
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i]
+    let shippingAddress1 = line['Shipping Address1'] || ''
+    let shippingAddress2 = line['Shipping Address2'] || ''
     shippingAddress1 = shippingAddress1.trim()
     shippingAddress2 = shippingAddress2.trim()
-    var shippingZip = line['Shipping Zip'] || ''
+    let shippingZip = line['Shipping Zip'] || ''
     shippingZip = shippingZip.replace("'", '')
-    var label = '<div class="label">'
+    let label = '<div class="label">'
     label += line['Shipping Name'] + '<br>'
     label += shippingAddress1 + '<br>'
     if (shippingAddress2 && shippingAddress2 !== shippingAddress1) {

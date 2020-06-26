@@ -2,12 +2,14 @@
   "scripts": {
     "build": "parcel build src/index.html --out-dir ./assets --public-url assets/ --global shpf && mv assets/index.html .",
     "clean": "rm assets/*",
-    "format": "eslint --fix './js/*.js'; stylelint --fix './css/*.css'",
-    "lint": "eslint './js/*.js'; stylelint './css/*.css'",
+    "format": "eslint --quiet  --fix 'src/ts/*.ts'; stylelint --fix 'src/scss/*.scss'",
+    "lint": "eslint 'src/ts/*.ts'; stylelint 'src/scss/*.scss'",
     "start": "parcel src/index.html --global shpf"
   },
   "license": "MIT",
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "3.4.0",
+    "@typescript-eslint/parser": "3.4.0",
     "eslint": "7.3.1",
     "eslint-config-prettier": "6.11.0",
     "eslint-plugin-prettier": "3.1.4",
