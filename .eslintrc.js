@@ -13,7 +13,7 @@ module.exports = {
     'plugin:prettier/recommended',
     'prettier/@typescript-eslint',
   ],
-  plugins: ['@typescript-eslint','prettier'],
+  plugins: ['@typescript-eslint', 'prettier'],
   rules: {
     'eol-last': ['error', 'always'],
     'no-multiple-empty-lines': ['error', { max: 2, maxEOF: 1 }],
