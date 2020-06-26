@@ -3,7 +3,9 @@
     font-family: 'Courier New', Courier, monospace;
   }
 
-  #output {
+  .page {
+    width: 100%;
+    margin: 0.2em 0.1em;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
   }
