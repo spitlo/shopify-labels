@@ -25,6 +25,19 @@
 
           <button type="submit" id="submit-button">Generate labels!</button>
         </fieldset>
+        <fieldset>
+          <label for="vertical-margins">
+            <strong>Vertical margins:</strong>
+          </label>
+          <input type="range" min="1" max="20" value="8" name="vertical-margins" id="vertical-margins" />
+          (<span id="vm-value">8mm</span>)
+          <br>
+          <label for="horizontal-margins">
+            <strong>Horizontal margins:</strong>
+          </label>
+          <input type="range" min="1" max="20" value="6" name="horizontal-margins" id="horizontal-margins" />
+          (<span id="hm-value">6mm</span>)
+        </fieldset>
       </form>
     </div>
     <div id="output"></div>

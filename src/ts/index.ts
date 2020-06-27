@@ -8,6 +8,11 @@ export function init(): void {
   // Temp, remove when/if posthtml-expressions is working
   labelForm.elements[1].value = DEFAULT_COLUMNS
   labelForm.elements[2].value = DEFAULT_ROWS
+
+  const horizontalMargins = document.getElementById('horizontal-margins')
+  const verticalMargins = document.getElementById('vertical-margins')
+  horizontalMargins.addEventListener('input', updateHMargins)
+  verticalMargins.addEventListener('input', updateVMargins)
 }
 
 export function handleFiles(event): void {
@@ -50,6 +55,26 @@ export function handleFiles(event): void {
   } else {
     alert('Sorry, you need a newer browser')
   }
+}
+
+function updateHMargins(event) {
+  const { target } = event
+  const { value } = target
+  const bodyStyles = document.body.style
+  const cssValue = `${value}mm`
+  bodyStyles.setProperty('--horizontal-margins', cssValue)
+  const hmValue = document.getElementById('hm-value')
+  hmValue.innerHTML = cssValue
+}
+
+function updateVMargins(event) {
+  const { target } = event
+  const { value } = target
+  const bodyStyles = document.body.style
+  const cssValue = `${value}mm`
+  bodyStyles.setProperty('--vertical-margins', cssValue)
+  const vmValue = document.getElementById('vm-value')
+  vmValue.innerHTML = cssValue
 }
 
 function printLabels(lines, options): void {

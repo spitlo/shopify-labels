@@ -1,3 +1,8 @@
+:root {
+  --vertical-margins: 8mm;
+  --horizontal-margins: 6mm;
+}
+
 section.page {
   display: grid;
 
@@ -25,7 +30,7 @@ section.page {
 
   .page {
     width: 100%;
-    margin: 0.2em 0.1em;
+    margin: var(--vertical-margins) var(--horizontal-margins);
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
   }
@@ -40,7 +45,7 @@ section.page {
 @media print {
   @page {
     size: 210mm 297mm;
-    margin: 8mm 6mm;
+    margin: var(--vertical-margins) var(--horizontal-margins);
     padding: 0;
   }
 
@@ -58,7 +63,6 @@ section.page {
     break-after: page;
   }
 
-
   #input {
     display: none;
   }
@@ -70,8 +74,5 @@ section.page {
     margin: 0;
     padding: 0;
     padding: 3mm;
-  }
-
-  div.label-content {
   }
 }
