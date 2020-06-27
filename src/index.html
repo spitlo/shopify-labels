@@ -7,16 +7,30 @@
 
   <body>
     <div id="input">
-      <form>
+      <form id="labelForm">
         <fieldset>
-          <label for="file-form">
+          <label for="columns">
+            <strong>Columns:</strong>
+          </label>
+          <input type="number" min="2" max="4" name="columns" />
+          <label for="rows">
+            <strong>Rows:</strong>
+          </label>
+          <input type="number" min="8" max="12" name="rows" />
+
+          <label for="file">
             <strong>Orders file (csv format):</strong>
           </label>
-          <input type="file" id="file-form" onchange="shpf.handleFiles(this.files)" accept=".csv">
+          <input type="file" accept=".csv" required name="file" />
+
+          <button type="submit" id="submit-button">Generate labels!</button>
         </fieldset>
       </form>
     </div>
     <div id="output"></div>
     <script src="ts/index.ts"></script>
+    <script>
+      shpf.init()
+    </script>
   </body>
 </html>

@@ -1,3 +1,23 @@
+section.page {
+  display: grid;
+
+  &.c2 { grid-template-columns: repeat(2, 1fr) }
+
+  &.c3 { grid-template-columns: repeat(3, 1fr) }
+
+  &.c4 { grid-template-columns: repeat(4, 1fr) }
+
+  &.r8 { grid-template-rows: repeat(8, 1fr) }
+
+  &.r9 { grid-template-rows: repeat(9, 1fr) }
+
+  &.r10 { grid-template-rows: repeat(10, 1fr) }
+
+  &.r11 { grid-template-rows: repeat(11, 1fr) }
+
+  &.r12 { grid-template-rows: repeat(12, 1fr) }
+}
+
 @media screen {
   body {
     font-family: 'Courier New', Courier, monospace;
@@ -34,12 +54,10 @@
     width: 210mm;
     height: 297mm;
     margin: 0;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(11, 1fr);
     page-break-after: always;
     break-after: page;
   }
+
 
   #input {
     display: none;

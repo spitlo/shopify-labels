@@ -1,10 +1,33 @@
 import Papa from 'papaparse'
 
-export function handleFiles(files) {
+import { DEFAULT_COLUMNS, DEFAULT_ROWS } from '../config'
+
+export function init(): void {
+  const labelForm: any = document.getElementById('labelForm')
+  labelForm.onsubmit = handleFiles
+  // Temp, remove when/if posthtml-expressions is working
+  labelForm.elements[1].value = DEFAULT_COLUMNS
+  labelForm.elements[2].value = DEFAULT_ROWS
+}
+
+export function handleFiles(event): void {
+  event.preventDefault()
+  const { target } = event
+  let { columns, rows, file } = target
+  columns = (columns && columns.value) || DEFAULT_COLUMNS
+  rows = (rows && rows.value) || DEFAULT_ROWS
+  file = file.files[0]
+
+  if (!file) {
+    return alert('Please pick a file')
+  }
+
+  // Change button text to make more sense
+  document.getElementById('submit-button').textContent = 'Re-generate labels!'
+
   if (window.FileReader) {
-    const file = files[0]
     Papa.parse(file, {
-      complete: function (parsed) {
+      complete: (parsed) => {
         // Parsed, now parse again!
         const lines = []
         const keys = parsed.data[0]
@@ -18,7 +41,10 @@ export function handleFiles(files) {
             lines.push(line)
           }
         }
-        printLabels(lines)
+        printLabels(lines, {
+          columns,
+          rows,
+        })
       },
     })
   } else {
@@ -26,10 +52,11 @@ export function handleFiles(files) {
   }
 }
 
-function printLabels(lines) {
+function printLabels(lines, options): void {
+  const { columns, rows } = options
   const output = document.getElementById('output')
   output.innerHTML = ''
-  let labels = '<section class="page">'
+  let labels = `<section class="page c${columns} r${rows}">`
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i]
@@ -37,23 +64,28 @@ function printLabels(lines) {
     const shippingAddress1 = (line['Shipping Address1'] || '').trim()
     const shippingAddress2 = (line['Shipping Address2'] || '').trim()
     const shippingZip = (line['Shipping Zip'] || '').replace("'", '')
-    const shippingCity = (line['Shipping City']).trim()
+    const shippingCity = line['Shipping City'].trim()
+
     const label = `
       <div class="label">
         ${shippingName}<br>
         ${shippingAddress1}<br>
-        ${shippingAddress2 && shippingAddress2 !== shippingAddress1 ? `${shippingAddress2}<br>` : ''}
+        ${
+          shippingAddress2 && shippingAddress2 !== shippingAddress1
+            ? `${shippingAddress2}<br>`
+            : ''
+        }
         ${shippingZip} ${shippingCity}
       </div>
     `
 
     labels = `${labels}${label}`
 
-    if (i && i % 32 === 0) {
-      labels += '</section><section class="page">'
+    if (i > 0 && (i + 1) % (columns * rows) === 0) {
+      labels = `${labels}</section><section class="page c${columns} r${rows}">`
     }
   }
-  labels += '</section>'
+  labels = `${labels}</section>`
 
   output.insertAdjacentHTML('afterbegin', labels)
 }

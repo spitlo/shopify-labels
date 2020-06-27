@@ -1,12 +1,13 @@
 {
+  "version": "0.3.0",
+  "license": "MIT",
   "scripts": {
     "build": "parcel build src/index.html --out-dir ./assets --public-url assets/ --global shpf && mv assets/index.html .",
     "clean": "rm assets/*",
-    "format": "eslint --quiet  --fix 'src/ts/*.ts'; stylelint --fix 'src/scss/*.scss'",
+    "format": "eslint --quiet --fix 'src/ts/*.ts'; stylelint --fix 'src/scss/*.scss'",
     "lint": "eslint 'src/ts/*.ts'; stylelint 'src/scss/*.scss'",
     "start": "parcel src/index.html --global shpf"
   },
-  "license": "MIT",
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "3.4.0",
     "@typescript-eslint/parser": "3.4.0",
@@ -21,6 +22,5 @@
   },
   "dependencies": {
     "papaparse": "5.2.0"
-  },
-  "version": "0.3.0"
+  }
 }
