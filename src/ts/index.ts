@@ -33,21 +33,22 @@ function printLabels(lines) {
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i]
-    let shippingAddress1 = line['Shipping Address1'] || ''
-    let shippingAddress2 = line['Shipping Address2'] || ''
-    shippingAddress1 = shippingAddress1.trim()
-    shippingAddress2 = shippingAddress2.trim()
-    let shippingZip = line['Shipping Zip'] || ''
-    shippingZip = shippingZip.replace("'", '')
-    let label = '<div class="label">'
-    label += line['Shipping Name'] + '<br>'
-    label += shippingAddress1 + '<br>'
-    if (shippingAddress2 && shippingAddress2 !== shippingAddress1) {
-      label += line['Shipping Address2'] + '<br>'
-    }
-    label += shippingZip + ' ' + line['Shipping City'] + '<br>'
-    label += '</div>'
-    labels += label
+    const shippingName = line['Shipping Name'] || ''
+    const shippingAddress1 = (line['Shipping Address1'] || '').trim()
+    const shippingAddress2 = (line['Shipping Address2'] || '').trim()
+    const shippingZip = (line['Shipping Zip'] || '').replace("'", '')
+    const shippingCity = (line['Shipping City']).trim()
+    const label = `
+      <div class="label">
+        ${shippingName}<br>
+        ${shippingAddress1}<br>
+        ${shippingAddress2 && shippingAddress2 !== shippingAddress1 ? `${shippingAddress2}<br>` : ''}
+        ${shippingZip} ${shippingCity}
+      </div>
+    `
+
+    labels = `${labels}${label}`
+
     if (i && i % 32 === 0) {
       labels += '</section><section class="page">'
     }
