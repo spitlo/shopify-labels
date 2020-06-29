@@ -31,8 +31,8 @@ section.page {
   }
 
   div.label {
-    padding: 3mm;
-    border: 1px dashed;
+    padding: 6mm 0 0 6mm;
+    border: 1px dashed lightgrey;
     height: 22mm;
   }
 }
@@ -69,6 +69,6 @@ section.page {
     font-family: 'Courier New', Courier, monospace;
     font-size: 16px;
     margin: 0;
-    padding: 6mm 6mm 0 0;
+    padding: 6mm 0 0 6mm;
   }
 }
