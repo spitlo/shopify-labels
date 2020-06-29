@@ -54,6 +54,7 @@ section.page {
     width: 210mm;
     height: 297mm;
     margin: 0;
+    padding: 0;
     page-break-after: always;
     break-after: page;
   }
@@ -68,10 +69,6 @@ section.page {
     font-family: 'Courier New', Courier, monospace;
     font-size: 16px;
     margin: 0;
-    padding: 0;
-    padding: 3mm;
-  }
-
-  div.label-content {
+    padding: 6mm 6mm 0 0;
   }
 }
