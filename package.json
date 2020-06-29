@@ -1,5 +1,5 @@
 {
-  "version": "0.5.0",
+  "version": "0.5.1",
   "license": "MIT",
   "scripts": {
     "build": "parcel build src/index.html --out-dir ./assets --public-url assets/ --global shpf && mv assets/index.html .",
