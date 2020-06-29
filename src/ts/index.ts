@@ -5,15 +5,21 @@ import { DEFAULT_COLUMNS, DEFAULT_ROWS } from '../config'
 export function init(): void {
   const labelForm: any = document.getElementById('labelForm')
   labelForm.onsubmit = handleFiles
+  labelForm.onchange = () => {
+    document.getElementById('submit-button').removeAttribute('disabled')
+  }
   // Temp, remove when/if posthtml-expressions is working
   labelForm.elements[1].value = DEFAULT_COLUMNS
   labelForm.elements[2].value = DEFAULT_ROWS
+  const filePicker = document.getElementById('file-picker')
+  filePicker.onchange = handleFiles
 }
 
 export function handleFiles(event): void {
   event.preventDefault()
-  const { target } = event
-  let { columns, rows, file } = target
+  const labelForm: any = document.getElementById('labelForm')
+  const { elements } = labelForm
+  let { columns, rows, file } = elements
   columns = (columns && columns.value) || DEFAULT_COLUMNS
   rows = (rows && rows.value) || DEFAULT_ROWS
   file = file.files[0]
@@ -22,8 +28,10 @@ export function handleFiles(event): void {
     return alert('Please pick a file')
   }
 
-  // Change button text to make more sense
-  document.getElementById('submit-button').textContent = 'Re-generate labels!'
+  // Change button text to make more sense, and disable it until changes occur
+  const submitButton = document.getElementById('submit-button')
+  submitButton.textContent = 'Re-generate labels!'
+  submitButton.setAttribute('disabled', 'disabled')
 
   if (window.FileReader) {
     Papa.parse(file, {
