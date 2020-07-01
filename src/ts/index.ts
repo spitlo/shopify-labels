@@ -97,10 +97,7 @@ function printLabels(lines, options): void {
       shownOrders.push(orderName)
       shownOrderCount++
 
-      if (
-        shownOrderCount > 0 &&
-        (shownOrderCount + 1) % (columns * rows) === 0
-      ) {
+      if (shownOrderCount > 0 && shownOrderCount % (columns * rows) === 0) {
         labels = `${labels}</section><section class="page c${columns} r${rows}">`
       }
     }
