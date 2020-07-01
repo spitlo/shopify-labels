@@ -65,32 +65,44 @@ function printLabels(lines, options): void {
   const output = document.getElementById('output')
   output.innerHTML = ''
   let labels = `<section class="page c${columns} r${rows}">`
+  const shownOrders = []
+  let shownOrderCount = 0
 
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i]
-    const shippingName = line['Shipping Name'] || ''
-    const shippingAddress1 = (line['Shipping Address1'] || '').trim()
-    const shippingAddress2 = (line['Shipping Address2'] || '').trim()
-    const shippingZip = (line['Shipping Zip'] || '').replace("'", '')
-    const shippingCity = line['Shipping City'].trim()
+  for (const line of lines) {
+    const orderName = line['Name']
+    // Orders with more than on product gets multiple
+    // lines in the csv. We only want to show the first line.
+    if (!shownOrders.includes(orderName)) {
+      const shippingName = line['Shipping Name'] || ''
+      const shippingAddress1 = (line['Shipping Address1'] || '').trim()
+      const shippingAddress2 = (line['Shipping Address2'] || '').trim()
+      const shippingZip = (line['Shipping Zip'] || '').replace("'", '')
+      const shippingCity = line['Shipping City'].trim()
 
-    const label = `
-      <div class="label">
-        ${shippingName}<br>
-        ${shippingAddress1}<br>
-        ${
-          shippingAddress2 && shippingAddress2 !== shippingAddress1
-            ? `${shippingAddress2}<br>`
-            : ''
-        }
-        ${shippingZip} ${shippingCity}
-      </div>
-    `
+      const label = `
+        <div class="label">
+          ${shippingName}<br>
+          ${shippingAddress1}<br>
+          ${
+            shippingAddress2 && shippingAddress2 !== shippingAddress1
+              ? `${shippingAddress2}<br>`
+              : ''
+          }
+          ${shippingZip} ${shippingCity}
+        </div>
+      `
 
-    labels = `${labels}${label}`
+      labels = `${labels}${label}`
 
-    if (i > 0 && (i + 1) % (columns * rows) === 0) {
-      labels = `${labels}</section><section class="page c${columns} r${rows}">`
+      shownOrders.push(orderName)
+      shownOrderCount++
+
+      if (
+        shownOrderCount > 0 &&
+        (shownOrderCount + 1) % (columns * rows) === 0
+      ) {
+        labels = `${labels}</section><section class="page c${columns} r${rows}">`
+      }
     }
   }
   labels = `${labels}</section>`
