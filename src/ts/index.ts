@@ -1,6 +1,6 @@
 import Papa from 'papaparse'
 
-import { DEFAULT_COLUMNS, DEFAULT_ROWS } from '../config'
+import { DEFAULT_COLUMNS, DEFAULT_ROWS, DEFAULT_COUNTRY } from '../config'
 
 export function init(): void {
   const labelForm: any = document.getElementById('labelForm')
@@ -70,7 +70,7 @@ function printLabels(lines, options): void {
 
   for (const line of lines) {
     const orderName = line['Name']
-    // Orders with more than on product gets multiple
+    // Orders with more than one product gets multiple
     // lines in the csv. We only want to show the first line.
     if (!shownOrders.includes(orderName)) {
       const shippingName = line['Shipping Name'] || ''
@@ -78,6 +78,7 @@ function printLabels(lines, options): void {
       const shippingAddress2 = (line['Shipping Address2'] || '').trim()
       const shippingZip = (line['Shipping Zip'] || '').replace("'", '')
       const shippingCity = line['Shipping City'].trim()
+      const shippingCountry = line['Shipping Country'] || ''
 
       const label = `
         <div class="label">
@@ -89,6 +90,7 @@ function printLabels(lines, options): void {
               : ''
           }
           ${shippingZip} ${shippingCity}
+          ${shippingCountry !== DEFAULT_COUNTRY ? '<br>' + shippingCountry : ''}
         </div>
       `
 
