@@ -33,7 +33,7 @@ if [ "$(git symbolic-ref -q HEAD)" != "refs/heads/master" ]; then
   exit 1
 fi
 
-if [ -n "$(git status --porcelain|grep -v '^??')" ]; then
+if git status --porcelain|grep -qv '^??'; then
   echo "Please commit your changes before publishing."
   exit 1
 else
